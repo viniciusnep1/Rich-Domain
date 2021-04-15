@@ -1,9 +1,14 @@
-﻿using System;
+﻿using Flunt.Notifications;
+using System;
 
 namespace Core
 {
-    public abstract class BaseEntity
+    public abstract class BaseEntity : Notifiable<Notification>
     {
-        public Guid Id { get; set; }
+        public BaseEntity()
+        {
+            Id = new Guid();
+        }
+        public Guid Id { get;  private set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Core;
+using Domain.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,6 +15,8 @@ namespace Domain.Entities
             Document = document;
             Email = email;
             _subscriptions = new List<Subscription>();
+
+            AddNotifications(new PersonContract(this));
         }
 
         public string Name { get; set; }
@@ -27,7 +30,11 @@ namespace Domain.Entities
         //Deactivating all subscription before add a new subscription
         public void AddSubscription(Subscription subscription)
         {
-            _subscriptions.ForEach(x => x.Deactivated());
+            var hasSubscriptionActive = false;
+
+            _subscriptions.ForEach(item => { if (item.Active) hasSubscriptionActive = true; });
+            if (hasSubscriptionActive) AddNotification("Person.Subscriptions", "Você já possui assinatura ativa!");
+
             _subscriptions.Add(subscription);
         }
     }
