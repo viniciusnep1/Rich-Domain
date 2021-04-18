@@ -1,5 +1,6 @@
 ﻿using Flunt.Notifications;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Core
 {
@@ -9,6 +10,8 @@ namespace Core
         {
             Id = new Guid();
         }
+
+        [Key]
         public Guid Id { get;  private set; }
     }
 }
