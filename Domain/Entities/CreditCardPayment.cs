@@ -7,7 +7,7 @@ namespace Domain.Entities
 
     public class CreditCardPayment : PaymentMethod
     {
-        public CreditCardPayment(string cardHolderName, string creditCardNumber, string lastTransactionNumber,int number, DateTime paidDate, DateTime expiseDate, decimal total, decimal totalPaid, string owner, string document, string email) : base(number, paidDate, expiseDate, total, totalPaid, owner, document, email)
+        public CreditCardPayment(string cardHolderName, string creditCardNumber, string lastTransactionNumber,int number, DateTime paidDate, DateTime expireDate, decimal total, decimal totalPaid, string owner, string document, string email) : base(number, paidDate, expireDate, total, totalPaid, owner, document, email)
         {
             CardHolderName = cardHolderName;
             CreditCardNumber = creditCardNumber;

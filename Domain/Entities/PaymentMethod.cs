@@ -7,11 +7,11 @@ namespace Domain.Entities
 {
     public abstract class PaymentMethod : BaseEntity
     {
-        public PaymentMethod(int number, DateTime paidDate, DateTime expiseDate, decimal total, decimal totalPaid, string owner, string document, string email)
+        protected PaymentMethod(int number, DateTime paidDate, DateTime expireDate, decimal total, decimal totalPaid, string owner, string document, string email)
         {
             Number = number;
             PaidDate = paidDate;
-            ExpireDate = expiseDate;
+            ExpireDate = expireDate;
             Total = total;
             TotalPaid = totalPaid;
             Owner = owner;

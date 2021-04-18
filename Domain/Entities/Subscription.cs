@@ -1,10 +1,11 @@
 ﻿using Core;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities
 {
+    [Table("subscription")]
     public class Subscription : BaseEntity
     {
         public Subscription(DateTime creatDate, DateTime updateDate, DateTime? expiseDate, bool active)
