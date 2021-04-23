@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace WebApi.Controllers
 {
@@ -35,5 +39,52 @@ namespace WebApi.Controllers
             })
             .ToArray();
         }
+
+
+        [HttpPost("UploadTemplat")]
+        public async Task<IActionResult> Import(IFormFile file)
+        {
+            try
+            {
+                if (file == null)
+                {
+                    return BadRequest("File is null");
+                }
+
+                if (file.ContentType.Contains("xml"))
+                {
+                    using (var fileStream = new StreamReader(file.OpenReadStream()))
+                    {
+                        XmlReaderSettings settings = new XmlReaderSettings();
+                        settings.IgnoreWhitespace = true;
+                        using (XmlReader reader = XmlReader.Create(fileStream, settings))
+                        {
+                            while (reader.Read())
+                            {
+                                if (reader.Name == "infNFe")
+                                {
+                                    if (reader.HasAttributes)
+                                    {
+                                        var Id = reader.GetAttribute("Id");
+                                        var versao = reader.GetAttribute("versao");
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+
+
+
+                }
+
+                return Ok(file);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            };
+        }
+
     }
 }
